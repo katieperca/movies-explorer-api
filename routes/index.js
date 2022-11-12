@@ -6,11 +6,11 @@ const NotFoundError = require('../errors/not-found-err');
 const { login, createUser } = require('../controllers/users');
 const { createUserValidation, loginValidation } = require('../middlewares/validation');
 
-router.post('/api/signup', createUserValidation, createUser);
-router.post('/api/signin', loginValidation, login);
+router.post('/signup', createUserValidation, createUser);
+router.post('/signin', loginValidation, login);
 router.use(auth);
-router.use('/api/', usersRouter);
-router.use('/api/', moviesRouter);
+router.use('/', usersRouter);
+router.use('/', moviesRouter);
 router.use('*', (req, res, next) => {
   next(new NotFoundError('Маршрут не найден'));
 });

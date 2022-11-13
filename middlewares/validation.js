@@ -3,7 +3,7 @@ const urlRegexp = require('../utils/urlValidation');
 
 const createUserValidation = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
@@ -18,7 +18,7 @@ const loginValidation = celebrate({
 
 const updateProfileValidation = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().email(),
   }),
 });
@@ -35,7 +35,7 @@ const createMovieValidation = celebrate({
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
     thumbnail: Joi.string().pattern(urlRegexp),
-    movieId: Joi.string().required(),
+    movieId: Joi.number().required(),
   }),
 });
 

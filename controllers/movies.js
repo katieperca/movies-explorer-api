@@ -25,30 +25,34 @@ module.exports.createMovie = (req, res, next) => {
   } = req.body;
   const owner = req.user._id;
 
-  Movie.create({
-    owner,
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    nameRU,
-    nameEN,
-    thumbnail,
-    movieId,
-  })
-    .then((movie) => res.send(movie))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        res.send(err);
-        // next(new BadRequestError('Переданы некорректные данные при создании фильма'));
-      } else {
-        next(err);
-      }
-    });
-};
+  Movie.findOne({ movieId, owner }, (err, foundMovie) => {
+    if (!foundMovie) {
+      Movie.create({
+        owner,
+        country,
+        director,
+        duration,
+        year,
+        description,
+        image,
+        trailerLink,
+        nameRU,
+        nameEN,
+        thumbnail,
+        movieId,
+      })
+        .then((movie) => res.send(movie))
+        .catch((err) => {
+          if (err.name === 'ValidationError') {
+            res.send(err);
+            // next(new BadRequestError('Переданы некорректные данные при создании фильма'));
+          } else {
+            next(err);
+          }
+        });
+    }
+  });
+}
 
 module.exports.deleteMovieById = (req, res, next) => {
   const { movieId } = req.params;

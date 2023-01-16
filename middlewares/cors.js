@@ -1,6 +1,6 @@
 const allowedCors = [
-  'http://movies.katieperca.nomoredomains.icu',
-  'https://movies.katieperca.nomoredomains.icu',
+  'http://movies.katieperca.nomoredomains.rocks',
+  'https://movies.katieperca.nomoredomains.rocks',
   'http://localhost:3000',
   'https://localhost:3000',
 ];
